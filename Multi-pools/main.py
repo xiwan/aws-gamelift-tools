@@ -15,7 +15,7 @@ if len(sys.argv) > 1:
 
             # 根据选项名称执行相应操作
             if option == "help":
-                print("Usage: script.py [options] [arguments]")
+                print("Usage: main.py [options] [arguments]")
                 print("Options:")
                 print("\t-help: Show this help message")
                 print("\t-update: Update rulesets")
