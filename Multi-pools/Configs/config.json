@@ -16,12 +16,12 @@
     },{
       "name": "Radiant-Dire-Classic",
       "ruleset":"RadiantDire-Classic"
-    }],
-    "ticketPrefix": "benxiwan-",
-    "logs": "output.txt"
+    }]
   },
-  "players":{
-    "totalNum": 30,
+  "benchmark":{
+    "ticketPrefix": "benxiwan-",
+    "logs": "output.txt",
+    "totalPlayers": 30,
     "gameModes": [ "Classic", "Practice", "Survival" ],
     "team_size": {
       "default": 5,

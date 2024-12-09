@@ -18,6 +18,57 @@ Options:
         -json: Test json config
         -benchmark: Start a benchmark
 ```
+
+### confi-file
+
+it has 2 major parts
+
++ flexmatch: this is for flexmatch management, update ruleset or association. Make sure the configurations-name exist
+
++ benchmark: set up log file location, total players, game modes and etc. Now it is just standadlone mode, for fleet, you need to set it manually.
+
+```
+{
+  "version": "1.0",
+  "aws":{
+    "region": "us-east-1"
+  },
+  "flexmatch":{
+    "configurations": [{
+      "name": "Radiant-Dire-All",
+      "ruleset":"RadiantDire-All"
+    },{
+      "name": "Radiant-Dire-Survival",
+      "ruleset":"RadiantDire-Survival"
+    },{
+      "name": "Radiant-Dire-Practice",
+      "ruleset":"RadiantDire-Practice"
+    },{
+      "name": "Radiant-Dire-Classic",
+      "ruleset":"RadiantDire-Classic"
+    }]
+  },
+  "benchmark":{
+    "ticketPrefix": "benxiwan-",
+    "logs": "output.txt",
+    "totalPlayers": 300,
+    "gameModes": [ "Classic", "Practice", "Survival" ],
+    "team_size": {
+      "default": 5,
+      "small": 2
+    },
+    "latency": {
+      "median": 70,
+      "std_dev": 20
+    },
+    "skill": {
+      "median": 1000,
+      "std_dev": 400
+    }
+  }
+}
+```
+
 Usually, multi-pools rulesets have timing advantage over the All-in-one ruleset.
 ```
 ## benchmark all-in-one:

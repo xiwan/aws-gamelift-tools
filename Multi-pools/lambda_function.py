@@ -33,9 +33,6 @@ def read_json_file(file_path):
 def lambda_handler(event, context):
 
     gamelift = boto3.client('gamelift', region_name=context['aws']['region'])
-    totalNum = context['players']['totalNum']
-    ticketPrefix = context['flexmatch']['ticketPrefix']
-    logs = context['flexmatch']['logs']
 
     if event is None:
         if not context.get('flexmatch') or not context['flexmatch'].get('configurations'):
@@ -81,7 +78,11 @@ def lambda_handler(event, context):
                 pass
 
     else:
-        main_ticket.startMatchmaking(gamelift, totalNum)
+            
+        totalPlayers = context['benchmark']['totalPlayers']
+        ticketPrefix = context['benchmark']['ticketPrefix']
+        logs = context['benchmark']['logs']
+        main_ticket.startMatchmaking(gamelift, totalPlayers, ticketPrefix, logs)
 
     # TODO implement
     return {

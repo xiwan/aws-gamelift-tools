@@ -135,7 +135,7 @@ class RealTicket():
       self.players.append(self.mockPlayer(mrr_vals, lty_vals))
     pass
 
-  def startMatchmaking(self, gamelift, num_players):
+  def startMatchmaking(self, gamelift, num_players, ticketPrefix, logs):
     self.gamelift = gamelift
     self.mockPlayers(num_players)
     sub_players = split_array(self.players, MAX_TEAM_SIZE)
@@ -157,7 +157,7 @@ class RealTicket():
     print(f"Total players: {num_players}, Batches: {total_batches}")
 
     # monitor the tickets
-    logfilePath = os.getcwd()+'/output.txt'
+    logfilePath = f"{os.getcwd()}/{logs}"
     monitor_thread = threading.Thread(target=self.monitorTicket, args=(logfilePath,))
     monitor_thread.start()
 
@@ -191,7 +191,7 @@ class RealTicket():
         print(f"starting matchmaking for: {self.machmakingConfigurationName} with players: {len(batch_players)} game mode: {gameModes}")
         # print(f"{json.dumps(batch_players, indent=2)}")
         response = self.gamelift.start_matchmaking(
-          TicketId="benxiwan-" + generate_random_string(10),
+          TicketId= ticketPrefix + generate_random_string(10),
           ConfigurationName=self.machmakingConfigurationName,
           Players=batch_players
         )

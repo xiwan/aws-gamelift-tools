@@ -17,13 +17,15 @@ class MainTicket():
   def call(self):
     RealTicket().call()
 
-  def startMatchmaking(self, gamelift, total_players):
+  def startMatchmaking(self, gamelift, totalPlayers, ticketPrefix, logs):
     threads = []
     self.gamelift = gamelift
     # total_players = random.randint(200, 300)
-    print(f"total_players: {total_players}")
+    print(f"total_players: {totalPlayers}")
     for realticket in self.realtickets:
-      thread = threading.Thread(target=realticket.startMatchmaking, args=(self.gamelift, total_players,))
+      thread = threading.Thread(
+        target=realticket.startMatchmaking, 
+        args=(self.gamelift, totalPlayers, ticketPrefix, logs,))
       threads.append(thread)
       thread.start()
 

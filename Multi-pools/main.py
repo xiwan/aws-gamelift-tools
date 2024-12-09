@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
         if arg.startswith("-"):
             # 获取选项名称,去掉前缀 "-"
             option = arg[1:]
-            configJson = read_json_file(os.getcwd()+'/Multi-pools/Configs/config.json')
+            configJson = read_json_file(f"{os.getcwd()}/Multi-pools/Configs/config.json")
 
             # 根据选项名称执行相应操作
             if option == "help":
