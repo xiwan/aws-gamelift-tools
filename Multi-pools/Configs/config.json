@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "aws":{
+    "region": "us-east-1"
+  },
+  "flexmatch":{
+    "configurations": [{
+      "name": "Radiant-Dire-All",
+      "ruleset":"RadiantDire-All"
+    },{
+      "name": "Radiant-Dire-Survival",
+      "ruleset":"RadiantDire-Survival"
+    },{
+      "name": "Radiant-Dire-Practice",
+      "ruleset":"RadiantDire-Practice"
+    },{
+      "name": "Radiant-Dire-Classic",
+      "ruleset":"RadiantDire-Classic"
+    }],
+    "ticketPrefix": "benxiwan-",
+    "logs": "output.txt"
+  },
+  "players":{
+    "totalNum": 30,
+    "gameModes": [ "Classic", "Practice", "Survival" ],
+    "team_size": {
+      "default": 5,
+      "small": 2
+    },
+    "latency": {
+      "median": 70,
+      "std_dev": 20
+    },
+    "skill": {
+      "median": 1000,
+      "std_dev": 400
+    }
+  }
+}

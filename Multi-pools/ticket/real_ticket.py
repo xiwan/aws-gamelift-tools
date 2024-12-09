@@ -50,7 +50,7 @@ def generate_scores(num_players, median=1000, std_dev=400):
     scores = [max(1, int(score)) for score in scores]
     return scores
 
-gamelift = boto3.client('gamelift', region_name='us-east-1')
+# gamelift = boto3.client('gamelift', region_name='us-east-1')
 ALL_GAMEMODES = [ "Classic", "Practice", "Survival" ]
 MAX_TEAM_SIZE = 5
 MAX_TEAM_SIZE_SAMLL = 2
@@ -76,7 +76,7 @@ class RealTicket():
       while True:
         print(self.ticketIds)
         for ticketId in self.ticketIds:
-          response = gamelift.describe_matchmaking(TicketIds=[ticketId])
+          response = self.gamelift.describe_matchmaking(TicketIds=[ticketId])
           for ticket in response['TicketList']:
             # print(ticket)
             if ticket['Status'] == 'COMPLETED':
@@ -99,9 +99,9 @@ class RealTicket():
 
           print(logfilePath)
           with open(logfilePath, 'a') as outputfile:
-            print(f"\n\nMatchmaking Monitor for [{self.machmakingConfigurationName}] Done!", file=outputfile)
-            print(f"Complete Tickets: {len(self.completeTickets)}, Average Time: {complete_avg:.2f} seconds", file=outputfile)
-            print(f"Failed Tickets: {len(self.failedTickets)}, Average Time: {failed_avg:.2f} seconds", file=outputfile)
+            print(f"\n\nMatchmaking Monitor for [{self.machmakingConfigurationName}] Done!")
+            print(f"Complete Tickets: {len(self.completeTickets)}, Average Time: {complete_avg:.2f} seconds")
+            print(f"Failed Tickets: {len(self.failedTickets)}, Average Time: {failed_avg:.2f} seconds")
           break
         time.sleep(3)
     except Exception as e:
@@ -135,7 +135,8 @@ class RealTicket():
       self.players.append(self.mockPlayer(mrr_vals, lty_vals))
     pass
 
-  def startMatchmaking(self, num_players):
+  def startMatchmaking(self, gamelift, num_players):
+    self.gamelift = gamelift
     self.mockPlayers(num_players)
     sub_players = split_array(self.players, MAX_TEAM_SIZE)
     if "All" in self.machmakingConfigurationName:
@@ -189,7 +190,7 @@ class RealTicket():
         
         print(f"starting matchmaking for: {self.machmakingConfigurationName} with players: {len(batch_players)} game mode: {gameModes}")
         # print(f"{json.dumps(batch_players, indent=2)}")
-        response = gamelift.start_matchmaking(
+        response = self.gamelift.start_matchmaking(
           TicketId="benxiwan-" + generate_random_string(10),
           ConfigurationName=self.machmakingConfigurationName,
           Players=batch_players
