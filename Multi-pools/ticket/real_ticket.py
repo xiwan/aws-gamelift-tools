@@ -1,3 +1,31 @@
+"""
+AWS GameLift Matchmaking Ticket Handler
+AWS GameLift 匹配票据处理系统
+
+This module implements a real-time matchmaking ticket system for AWS GameLift, supporting multiple game modes
+and flexible player configurations.
+本模块实现了一个AWS GameLift实时匹配票据系统，支持多种游戏模式和灵活的玩家配置。
+
+Key features 主要特性:
+- Supports multiple game modes (支持多种游戏模式): Classic经典, Practice练习, Survival生存
+- Handles dynamic player grouping with configurable team sizes (处理动态玩家分组，可配置队伍大小)
+- Implements matchmaking monitoring with real-time status updates (实现实时状态更新的匹配监控)
+- Manages player attributes including skill ratings and latency (管理玩家属性，包括技能评级和延迟)
+- Provides detailed matchmaking statistics and logging (提供详细的匹配统计和日志记录)
+
+Main Components 主要组件:
+- RealTicket: Core class managing matchmaking tickets and player groups
+  核心类，管理匹配票据和玩家组
+- Player Generation: Creates mock players with realistic skill distributions
+  玩家生成：创建具有真实技能分布的模拟玩家
+- Monitoring System: Tracks ticket status and completion rates
+  监控系统：跟踪票据状态和完成率
+- Batch Processing: Handles player groups in configurable batch sizes
+  批处理：以可配置的批次大小处理玩家组
+
+Dependencies 依赖: boto3, numpy, datetime, threading
+"""
+
 from datetime import datetime
 
 import json, os, random, time
@@ -6,6 +34,7 @@ import uuid
 import boto3
 import numpy as np
 import threading
+
 
 def generate_random_string(length):
     characters = string.ascii_letters + string.digits
@@ -213,4 +242,3 @@ class RealTicket():
       print(f"Total Batches: {total_batches}")
       print(f"Total Time: {formatted_time}")
       print(f"Average Time per Batch: {(total_time/total_batches):.2f} seconds")
-
