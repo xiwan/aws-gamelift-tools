@@ -105,20 +105,20 @@ Failed Tickets: 2, Average Time: 120.06 seconds
 ```
 ## benchmark all-in-one:
 Matchmaking Monitor for [Radiant-Dire-All] Done!
-Complete Tickets: 9, Average Time: 31.85 seconds
-Failed Tickets: 25, Average Time: 41.76 seconds
+Complete Tickets: 175, Average Time: 36.08 seconds
+Failed Tickets: 508, Average Time: 41.61 seconds
 
 ## benchmark multi-pools:
 Matchmaking Monitor for [Radiant-Dire-Practice] Done!
-Complete Tickets: 19, Average Time: 30.64 seconds
-Failed Tickets: 8, Average Time: 34.99 seconds
+Complete Tickets: 319, Average Time: 30.68 seconds
+Failed Tickets: 342, Average Time: 34.14 seconds
 
 Matchmaking Monitor for [Radiant-Dire-Classic] Done!
-Complete Tickets: 21, Average Time: 22.05 seconds
-Failed Tickets: 14, Average Time: 40.23 seconds
+Complete Tickets: 311, Average Time: 34.03 seconds
+Failed Tickets: 376, Average Time: 35.61 seconds
 
 Matchmaking Monitor for [Radiant-Dire-Survival] Done!
-Complete Tickets: 42, Average Time: 26.40 seconds
-Failed Tickets: 22, Average Time: 22.91 seconds
+Complete Tickets: 1028, Average Time: 24.03 seconds
+Failed Tickets: 309, Average Time: 29.45 seconds
 
 ```
