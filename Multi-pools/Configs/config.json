@@ -5,35 +5,45 @@
   },
   "flexmatch":{
     "configurations": [{
-      "name": "Radiant-Dire-All",
-      "ruleset":"RadiantDire-All"
-    },{
       "name": "Radiant-Dire-Survival",
+      "acceptance": 15,
       "ruleset":"RadiantDire-Survival"
     },{
       "name": "Radiant-Dire-Practice",
+      "acceptance": 15,
       "ruleset":"RadiantDire-Practice"
     },{
       "name": "Radiant-Dire-Classic",
+      "acceptance": 15,
       "ruleset":"RadiantDire-Classic"
+    },{
+      "name": "Radiant-Dire-All",
+      "acceptance": 15,
+      "ruleset":"RadiantDire-All"
     }]
   },
   "benchmark":{
     "ticketPrefix": "benxiwan-",
     "logs": "output.txt",
-    "totalPlayers": 30,
+    "totalPlayers": 100,
     "gameModes": [ "Classic", "Practice", "Survival" ],
-    "team_size": {
+    "acceptance": {
+      "rate": 0.9,
+      "timeout": 10
+    },
+    "teamSize": {
       "default": 5,
       "small": 2
     },
-    "latency": {
-      "median": 70,
-      "std_dev": 20
-    },
-    "skill": {
-      "median": 1000,
-      "std_dev": 400
+    "playerData":{
+      "latency": {
+        "median": 70,
+        "std_dev": 20
+      },
+      "skill": {
+        "median": 1000,
+        "std_dev": 400
+      }
     }
   }
 }

@@ -7,25 +7,24 @@ class MainTicket():
   def __init__(self):
     self.gamelift = boto3.client('gamelift')
     self.realtickets = []
-    self.realtickets.append(RealTicket('Radiant-Dire-All'))
-    self.realtickets.append(RealTicket('Radiant-Dire-Survival'))
-    self.realtickets.append(RealTicket('Radiant-Dire-Practice'))
-    self.realtickets.append(RealTicket('Radiant-Dire-Classic'))
-    
+
     pass
 
   def call(self):
     RealTicket().call()
 
-  def startMatchmaking(self, gamelift, totalPlayers, ticketPrefix, logs):
-    threads = []
+  def loadMatchMaking(self, configuartionName):
+    print(f'Load {configuartionName} matchmaker.')
+    self.realtickets.append(RealTicket(configuartionName))
+
+  def startMatchmaking(self, gamelift, benchmark):
     self.gamelift = gamelift
-    # total_players = random.randint(200, 300)
-    print(f"total_players: {totalPlayers}")
+    threads = []
+
     for realticket in self.realtickets:
       thread = threading.Thread(
         target=realticket.startMatchmaking, 
-        args=(self.gamelift, totalPlayers, ticketPrefix, logs,))
+        args=(self.gamelift, benchmark,))
       threads.append(thread)
       thread.start()
 

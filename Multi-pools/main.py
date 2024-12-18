@@ -18,16 +18,17 @@ if len(sys.argv) > 1:
                 print("Usage: main.py [options] [arguments]")
                 print("Options:")
                 print("\t-help: Show this help message")
-                print("\t-update: Update rulesets")
-                print("\t-json: Test json config")
+                print("\t-json: output json config")
+                print("\t-flexmatch: Update flexmatch sets")
                 print("\t-benchmark: Start a benchmark")
-            elif option == "update":
-                if configJson is not None:
-                    lambda_handler(None, configJson)
-            elif option == "test":
+            elif option == "json":
                 if configJson is not None:
                     print(configJson['flexmatch'])
+                    print(configJson['benchmark'])
                 pass
+            elif option == "flexmatch":
+                if configJson is not None:
+                    lambda_handler(None, configJson)
             elif option == "benchmark":
                 lambda_handler('benchmark', configJson)
             else:

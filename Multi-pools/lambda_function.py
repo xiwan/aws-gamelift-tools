@@ -61,11 +61,21 @@ def lambda_handler(event, context):
                 )
                 print(f"Created new ruleset: {rulesetName}")
 
-                gamelift.update_matchmaking_configuration(
-                    Name=config['name'],
-                    FlexMatchMode='STANDALONE',
-                    RuleSetName=rulesetName
-                )
+                if config['acceptance'] > 0:
+                    gamelift.update_matchmaking_configuration(
+                        Name=config['name'],
+                        FlexMatchMode='STANDALONE',
+                        AcceptanceTimeoutSeconds=config['acceptance'],
+                        AcceptanceRequired=True,
+                        RuleSetName=rulesetName
+                    )
+                else:
+                    gamelift.update_matchmaking_configuration(
+                        Name=config['name'],
+                        FlexMatchMode='STANDALONE',
+                        AcceptanceRequired=False,
+                        RuleSetName=rulesetName
+                    )
                 print(f"Updated matchmaking configuration: {config['name']} with new ruleset: {rulesetName}")
 
             except Exception as e:
@@ -78,11 +88,10 @@ def lambda_handler(event, context):
                 pass
 
     else:
-            
-        totalPlayers = context['benchmark']['totalPlayers']
-        ticketPrefix = context['benchmark']['ticketPrefix']
-        logs = context['benchmark']['logs']
-        main_ticket.startMatchmaking(gamelift, totalPlayers, ticketPrefix, logs)
+        for config in context['flexmatch']['configurations']:
+           main_ticket.loadMatchMaking(config['name'])
+
+        main_ticket.startMatchmaking(gamelift, context['benchmark'])
 
     # TODO implement
     return {
