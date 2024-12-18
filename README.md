@@ -14,8 +14,8 @@ a tool to demostrate how to benchmark the flexmatch service. Now it has serveral
 ```
 Options:
         -help: Show this help message
-        -update: Update rulesets
-        -json: Test json config
+        -json: Output json config
+        -flexmatch: Update flexmatch sets
         -benchmark: Start a benchmark
 ```
 
