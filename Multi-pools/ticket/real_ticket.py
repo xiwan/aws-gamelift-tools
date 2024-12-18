@@ -128,9 +128,9 @@ class RealTicket():
 
           print(logfilePath)
           with open(logfilePath, 'a') as outputfile:
-            print(f"\n\nMatchmaking Monitor for [{self.machmakingConfigurationName}] Done!")
-            print(f"Complete Tickets: {len(self.completeTickets)}, Average Time: {complete_avg:.2f} seconds")
-            print(f"Failed Tickets: {len(self.failedTickets)}, Average Time: {failed_avg:.2f} seconds")
+            print(f"\n\nMatchmaking Monitor for [{self.machmakingConfigurationName}] Done!", file=outputfile)
+            print(f"Complete Tickets: {len(self.completeTickets)}, Average Time: {complete_avg:.2f} seconds", file=outputfile)
+            print(f"Failed Tickets: {len(self.failedTickets)}, Average Time: {failed_avg:.2f} seconds", file=outputfile)
           break
         time.sleep(3)
     except Exception as e:
@@ -158,8 +158,6 @@ class RealTicket():
     mrr_vals = generate_scores(num_players, 1000, 200)
     lty_vals = generate_scores(num_players, LATENCY_MEDIAN, 20)
 
-    # print(mrr_vals)
-    # print(lty_vals)
     for i in range(num_players):
       self.players.append(self.mockPlayer(mrr_vals, lty_vals))
     pass
@@ -197,18 +195,26 @@ class RealTicket():
         print(f"==== Progress: {progress:.1f}% - Batch {index}/{total_batches} - "
               f"==== Processing {len(batch_players)} players in {self.machmakingConfigurationName}")
         
+        sleepRandomTimeLower = 1
+        sleepRandomTimeUpper = 3
         gameModes = []
         if "All" in self.machmakingConfigurationName:
           randomSize = random.randint(1, len(ALL_GAMEMODES))
           gameModes = random.sample(ALL_GAMEMODES, randomSize)
         elif "Classic" in self.machmakingConfigurationName:
           gameModes = ["Classic"]
+          sleepRandomTimeLower = 2
+          sleepRandomTimeUpper = 6
           pass
         elif "Practice" in self.machmakingConfigurationName:
-          gameModes = ["Practice"] 
+          gameModes = ["Practice"]
+          sleepRandomTimeLower = 2
+          sleepRandomTimeUpper = 6
           pass
         elif "Survival" in self.machmakingConfigurationName:
-          gameModes = ["Survival"]  
+          gameModes = ["Survival"]
+          sleepRandomTimeLower = 2
+          sleepRandomTimeUpper = 6  
           pass
         else:
           gameModes = ALL_GAMEMODES
@@ -227,7 +233,7 @@ class RealTicket():
 
         ticketId = response['MatchmakingTicket']['TicketId']
         self.ticketIds.append(ticketId)
-        time.sleep(random.randint(1, 3))
+        time.sleep(random.randint(sleepRandomTimeLower, sleepRandomTimeUpper))
   
     except Exception as e:
       print(f"\nError during matchmaking: {str(e)}")
